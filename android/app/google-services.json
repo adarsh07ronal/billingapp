@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "610360715147",
+    "project_id": "billingmedical-e5a25",
+    "storage_bucket": "billingmedical-e5a25.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:610360715147:android:71422a9006b4ccea24f18e",
+        "android_client_info": {
+          "package_name": "com.example.billingmedical"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "610360715147-b31vumohse0es1pf72cmn1sngm9kedab.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDf3_n8wf-uLPSir9Mhf-GCo9UJp4x6oi4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "610360715147-b31vumohse0es1pf72cmn1sngm9kedab.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "610360715147-7baf0kthhbldbakhge01023855592807.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.billingmedical"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
