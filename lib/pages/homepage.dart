@@ -34,48 +34,64 @@ class _homePageState extends State<homePage> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                ElevatedButton(
-                  style: style,
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => AddCategory()),
-                    );
-                  },
-                  child: const Text('Add Category'),
+                SizedBox(
+                  height: 50,
+                  width: 200,
+                  child: ElevatedButton(
+                    style: style,
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => AddCategory()),
+                      );
+                    },
+                    child: const Text('Add Category'),
+                  ),
                 ),
                 const SizedBox(height: 30),
-                ElevatedButton(
-                  style: style,
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => AddProduct()),
-                    );
-                  },
-                  child: const Text('Add Product'),
+                SizedBox(
+                  height: 50,
+                  width: 200,                  
+                  child: ElevatedButton(
+                    style: style,
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => AddProduct()),
+                      );
+                    },
+                    child: const Text('Add Product'),
+                  ),
                 ),
                 const SizedBox(height: 30),
-                ElevatedButton(
-                  style: style,
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => listProducts()),
-                    );
-                  },
-                  child: const Text('List Products'),
+                SizedBox(
+                  height: 50,
+                  width: 200,                  
+                  child: ElevatedButton(
+                    style: style,
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => listProducts()),
+                      );
+                    },
+                    child: const Text('List Products'),
+                  ),
                 ),
                 const SizedBox(height: 30),
-                ElevatedButton(
-                  style: style,
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => listCatgories()),
-                    );
-                  },
-                  child: const Text('List Categories'),
+                SizedBox(
+                  height: 50,
+                  width: 200,                   
+                  child: ElevatedButton(
+                    style: style,
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => listCatgories()),
+                      );
+                    },
+                    child: const Text('List Categories'),
+                  ),
                 ),
               ],
             ),

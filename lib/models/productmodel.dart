@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProductModel {
+  String? id;
   final String? name;
 
   final num batchnumber;
@@ -17,6 +18,7 @@ class ProductModel {
   final bool isActive;
 
   ProductModel({
+    this.id,
     this.name,
     this.batchnumber = 0,
     this.dosage = 0,
@@ -30,7 +32,7 @@ class ProductModel {
     this.isActive = true,
   });
 
-  factory ProductModel.fromMap(Map<String, dynamic> map) {
+  factory ProductModel.fromMap(Map<String, dynamic> map, [String id =""]) {
     return ProductModel(
       name: map['name'],
       batchnumber: map['batchnumber'],
@@ -43,6 +45,7 @@ class ProductModel {
       createdOn: map['createdOn'],
       updatedOn: map['updatedOn'],
       isActive: map['isActive'],
+      id: id,      
     );
   }
 

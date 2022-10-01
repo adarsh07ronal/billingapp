@@ -1,35 +1,20 @@
-import 'package:billingmedical/models/categorymodel.dart';
-import 'package:billingmedical/models/productmodel.dart';
+import 'package:billingmedical/management/mystore.dart';
 import 'package:billingmedical/pages/homepage.dart';
 import 'package:billingmedical/pages/listproducts.dart';
 import 'package:billingmedical/utils/routes.dart';
 import 'package:firedart/firestore/firestore.dart';
 import 'package:fluent_ui/fluent_ui.dart' as eos;
 import 'package:flutter/material.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class globalvariables {
-  String apiKey = 'AIzaSyBmKtMxlKGCGjDkFYkGj_tm7wNs4u_IDIY';
-  String projectId = 'billingmedical-e5a25';
-
-  globalvariables() {
-    Firestore.initialize(projectId);
-  }
-}
-
-// Store definition
-class MyStore extends VxStore {
-  final myfirestore = globalvariables();
-  List<ProductModel> products = [];
-  List<CategoryModel> categories = [];
-}
-
 Future<void> main() async {
+  sqfliteFfiInit();
+
   runApp(VxState(
     store: MyStore(),
     child: FireStoreApp(),
   ));
-  // runApp(const FireStoreApp());
 }
 
 class FireStoreApp extends StatelessWidget {

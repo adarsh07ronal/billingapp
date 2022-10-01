@@ -1,24 +1,21 @@
 // ignore_for_file: use_key_in_widget_constructors
 
 import 'package:billingmedical/main.dart';
+import 'package:billingmedical/management/mymutations.dart';
 import 'package:billingmedical/models/productmodel.dart';
 import 'package:firedart/firedart.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class getProducts extends VxMutation<MyStore> {
-  var ref = Firestore.instance.collection('products');
 
-  @override
-  perform() async {
-    var document = await ref.get();
-    // await Future.delayed(Duration(seconds: 5));
-    store?.products =
-        document.map((element) => ProductModel.fromMap(element.map)).toList();
-  }
-}
 
 class listProducts extends StatelessWidget {
+  deleteproduct(String id) async {
+    var ref = Firestore.instance.collection('products');
+    await ref.document(id).delete();
+    print("Deleted $id");
+  }
+
   @override
   Widget build(BuildContext context) {
     getProducts();
@@ -35,17 +32,21 @@ class listProducts extends StatelessWidget {
           builder: (context, store, status) => ListView.builder(
             itemBuilder: (context, index) => Card(
               child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
                   Column(
                     children: [
                       Icon(Icons.medical_services, color: Colors.green[500]),
                     ],
                   ),
+                  SizedBox(
+                    width: 100.0,
+                  ),
                   Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text("Name :"),
                           Text(
@@ -59,7 +60,7 @@ class listProducts extends StatelessWidget {
                         ],
                       ),
                       Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text("Price :"),
                           Text(
@@ -73,7 +74,35 @@ class listProducts extends StatelessWidget {
                         ],
                       ),
                       Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text("Strike price :"),
+                          Text(
+                            store.products[index].strikeprice.toString(),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text("Dosage :"),
+                          Text(
+                            store.products[index].dosage.toString(),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text("Batch :"),
                           Text(
@@ -86,32 +115,18 @@ class listProducts extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text("Dosage :"),
-                          Text(
-                            store.products[index].dosage.toString(),
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      )
                     ],
                   ),
+                  SizedBox(
+                    width: 200.0,
+                  ),
                   Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(
-                            width: 20.0,
-                            height: 30.0,
-                          ),
                           Text("Created On :"),
                           Text(
                             store.products[index].createdOn.toString(),
@@ -124,7 +139,7 @@ class listProducts extends StatelessWidget {
                         ],
                       ),
                       Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text("Updated On :"),
                           Text(
@@ -138,11 +153,27 @@ class listProducts extends StatelessWidget {
                         ],
                       ),
                       Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Name :"),
+                          Center(child: Text("Quantity :")),
+                          Center(
+                            child: Text(
+                              store.products[index].updatedOn.toString(),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text("categoryName :"),
                           Text(
-                            store.products[index].name,
+                            store.products[index].categoryName.toString(),
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
@@ -152,11 +183,11 @@ class listProducts extends StatelessWidget {
                         ],
                       ),
                       Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Price :"),
+                          Text("categoryId :"),
                           Text(
-                            store.products[index].price.toString(),
+                            store.products[index].categoryId.toString(),
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
@@ -164,71 +195,41 @@ class listProducts extends StatelessWidget {
                             ),
                           ),
                         ],
-                      )
+                      ),
                     ],
                   ),
                   Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text("Name :"),
-                          Text(
-                            store.products[index].name,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
+                      IconButton(
+                        icon: Icon(Icons.delete),
+                        onPressed: () => showDialog<String>(
+                          context: context,
+                          builder: (BuildContext context) => AlertDialog(
+                            title: const Text('Delete Product'),
+                            content: const Text('Delete Product'),
+                            actions: <Widget>[
+                              TextButton(
+                                onPressed: () => {
+                                  Navigator.pop(context, 'Cancel'),
+                                },
+                                child: const Text('Cancel'),
+                              ),
+                              TextButton(
+                                onPressed: () => {
+                                  deleteproduct(store.products[index].id),
+                                  getProducts(),
+                                  Navigator.pop(context, 'OK'),
+                                },
+                                child: const Text('OK'),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text("Price :"),
-                          Text(
-                            store.products[index].price.toString(),
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text("Name :"),
-                          Text(
-                            store.products[index].name,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text("Price :"),
-                          Text(
-                            store.products[index].price.toString(),
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
+                        ),
+                        // child: const Text('Show Dialog'),
                       )
                     ],
                   ),
-
                   // ListTile(
                   //   leading: FlutterLogo(size: 72.0),
                   //   title: Text(store.products[index].name),
